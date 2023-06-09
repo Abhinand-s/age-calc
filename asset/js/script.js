@@ -1,7 +1,21 @@
+let errorMessageDisplayed = false;
+function reset(){
+    
+    window.location.reload();
+}
 function calculate() {
     setInterval(( )=> {
         let birthdate = new Date(document.getElementById('birthdate').value);
+        
         let now = new Date();
+       if(birthdate > now && !errorMessageDisplayed)
+       {
+        alert('I AM UNABLE TO TIME TRAVEL \u{263A}');
+        errorMessageDisplayed = true;
+        reset();
+        return;
+       }  
+      
         let ageInMs = now.getTime() - birthdate.getTime();
         let ageIns = ageInMs / 1000;
         let ageInMins = ageIns / 60;
@@ -17,7 +31,4 @@ function calculate() {
         document.querySelector('#seconds').innerHTML=Math.floor(ageIns %60);
         document.querySelector('#seconds').style.borderBottom = '1px grey solid';
     }, 1000);
-}
-function reset(){
-    window.location.reload();
 }
